@@ -51,7 +51,9 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'corsheaders',  # To handle React-Django communication
     'products.apps.ProductsConfig',
-    'cart.apps.CartConfig'
+    'cart.apps.CartConfig',
+    'coupon.apps.CouponConfig',
+    'order.apps.OrderConfig'
 ]
 AUTH_USER_MODEL = 'user.User'  # Custom Auth model
 

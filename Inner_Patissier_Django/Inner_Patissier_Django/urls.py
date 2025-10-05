@@ -23,9 +23,6 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('products/', include('products.urls')),
     path('cart/', include('cart.urls')),
-    path('order/', include('order.urls')),  # 🚀 New order module included
-    path('deliveries/', include('delivery.urls')),
-    path('payment/', include('payment.urls')),
     path('coupon/', include('coupon.urls')),
 
     # re_path(r'^.*$', index),  # Catch-all pattern for serving React
