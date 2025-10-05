@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'cart.apps.CartConfig',
     'coupon.apps.CouponConfig',
-    'order.apps.OrderConfig'
+    'order.apps.OrderConfig',
+    'payment.apps.PaymentConfig'
 ]
 AUTH_USER_MODEL = 'user.User'  # Custom Auth model
 
