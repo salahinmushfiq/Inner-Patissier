@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'coupon.apps.CouponConfig',
     'order.apps.OrderConfig',
-    'payment.apps.PaymentConfig'
+    'payment.apps.PaymentConfig',
+    'delivery.apps.DeliveryConfig',
 ]
 AUTH_USER_MODEL = 'user.User'  # Custom Auth model
 
