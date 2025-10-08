@@ -134,9 +134,9 @@ class SSLCommerzInitView(APIView):
 
         # ✅ Extract safe user info (for both logged in and guest users)
         user = order.user
-        user_name = user.first_name if user and user.first_name else "Guest"
-        user_email = user.email if user else "guest@example.com"
-        user_phone = user.phone if user else "0000000000"
+        user_name = getattr(user, "first_name", None) or getattr(user, "username", "Guest")
+        user_email = getattr(user, "email", "guest@example.com")
+        user_phone = getattr(user, "phone", "0000000000")
         # if not order.user:
         #     print(order.user)
         #     return Response({"error": "Order user is missing."}, status=status.HTTP_400_BAD_REQUEST)
