@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status, generics
 
 import user
-from user.permissions import IsModerator,IsAdminOrModerator
+from user.permissions import IsModerator,IsAdminOrModerator,IsAuthenticatedOrGuestToken
 # from .permissions import IsModerator,IsAdminOrModerator
 from .models import Order, OrderStatusLog
 from .serializers import OrderCreateSerializer, OrderSerializer, OrderDetailSerializer, AdminOrderSerializer
@@ -63,7 +63,8 @@ class OrderListView(generics.ListAPIView):
 class OrderDetailView(generics.RetrieveAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrGuestToken]
 
     # def get_queryset(self):
     #     print("Queryset::::")

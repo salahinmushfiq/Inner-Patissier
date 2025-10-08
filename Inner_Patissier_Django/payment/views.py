@@ -129,7 +129,6 @@ class SSLCommerzInitView(APIView):
             )
             order.address = dummy_address
             order.payment_method = "SSLCOMMERZ"
-            order.is_paid = True
             order.save()
 
         # ✅ Extract safe user info (for both logged in and guest users)
@@ -224,7 +223,7 @@ class SSLPaymentSuccessView(APIView):
         order.is_paid = True
         order.status = "confirmed"
         order.save()
-        return redirect(f"/checkout/details/{order.id}")
+        return redirect(f"/checkout/details/{order.id}/")
         # return Response({"message": "Payment successful"})
 
 
