@@ -1,41 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.dff8bd69.css",
-    "main.js": "/static/js/main.0ecfffa0.js",
+    "main.css": "/static/css/main.4c5ff562.css",
+    "main.js": "/static/js/main.95662605.js",
     "static/js/879.a65ec548.chunk.js": "/static/js/879.a65ec548.chunk.js",
-    "static/media/product4.jpg": "/static/media/product4.767417bea17688d6d8ce.jpg",
-    "static/media/travelerchoice.PNG": "/static/media/travelerchoice.3552a2330c9b9c7e3147.PNG",
-    "static/media/product2.jpg": "/static/media/product2.e93f12ec1b20980a1bd1.jpg",
-    "static/media/Shosti.PNG": "/static/media/Shosti.66836c34a7a911f1b495.PNG",
-    "static/media/product1.jpg": "/static/media/product1.b8efc7a24c281ed8911b.jpg",
-    "static/media/Cheapism.png": "/static/media/Cheapism.40304f0c2f9a64439a64.png",
-    "static/media/hotelchain_app_combined.png": "/static/media/hotelchain_app_combined.f306654af88e1f3d14e6.png",
-    "static/media/avatar.jpg": "/static/media/avatar.f1b95a972b45eb2a428d.jpg",
-    "static/media/eternal_app_combine.png": "/static/media/eternal_app_combine.b1eea7c0b59432357d60.png",
-    "static/media/voogle_app_combined.png": "/static/media/voogle_app_combined.a6f0418f1c625a837ab7.png",
-    "static/media/lekhaporaonline_web_pic1.JPG": "/static/media/lekhaporaonline_web_pic1.8d9707a443b0ba51eb6d.JPG",
-    "static/media/lekhaporaonline_web_pic2.JPG": "/static/media/lekhaporaonline_web_pic2.1c170f34f3788bb6332a.JPG",
-    "static/media/product3.jpg": "/static/media/product3.be6bce80c539b3222473.jpg",
-    "static/media/eternal_web_pic2.JPG": "/static/media/eternal_web_pic2.510d58320867738197bc.JPG",
-    "static/media/avatar3.png": "/static/media/avatar3.013c6cf3e081328c4626.png",
-    "static/media/logo.png": "/static/media/logo.b62526ffbab04a3314f0.png",
-    "static/media/ample_tech_webpic1.JPG": "/static/media/ample_tech_webpic1.cc6665f9325a54b49e4c.JPG",
-    "static/media/web.png": "/static/media/web.9925fc5b9333ddf545cd.png",
-    "static/media/product8.jpg": "/static/media/product8.323ebcbe88240bd8423f.jpg",
-    "static/media/web-design.png": "/static/media/web-design.81114d1b167a3bd02b54.png",
-    "static/media/avatar2.jpg": "/static/media/avatar2.40d668f58c650e364281.jpg",
-    "static/media/product7.jpg": "/static/media/product7.69341801e3f5245c8020.jpg",
-    "static/media/product6.jpg": "/static/media/product6.3260a3b510aa12fc136b.jpg",
-    "static/media/android.png": "/static/media/android.5e26382fcebab32150f0.png",
-    "static/media/avatar4.jpg": "/static/media/avatar4.f56b774f77caaf2f6921.jpg",
-    "static/media/product5.jpg": "/static/media/product5.f4c5d8f991b753ca0fcc.jpg",
+    "static/media/cheapism.png": "/static/media/cheapism.40304f0c2f9a64439a64.png",
     "index.html": "/index.html",
-    "main.dff8bd69.css.map": "/static/css/main.dff8bd69.css.map",
-    "main.0ecfffa0.js.map": "/static/js/main.0ecfffa0.js.map",
+    "main.4c5ff562.css.map": "/static/css/main.4c5ff562.css.map",
+    "main.95662605.js.map": "/static/js/main.95662605.js.map",
     "879.a65ec548.chunk.js.map": "/static/js/879.a65ec548.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.dff8bd69.css",
-    "static/js/main.0ecfffa0.js"
+    "static/css/main.4c5ff562.css",
+    "static/js/main.95662605.js"
   ]
 }
