@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.50cc16d7.css",
+    "main.js": "/static/js/main.aae75b00.js",
+    "static/js/879.a6eb78e6.chunk.js": "/static/js/879.a6eb78e6.chunk.js",
+    "static/media/cheapism.png": "/static/media/cheapism.40304f0c2f9a64439a64.png",
+    "static/media/cake1.png": "/static/media/cake1.24a1ac3e47d4354e5e59.png",
+    "static/media/cake2.png": "/static/media/cake2.baa26689622dcce74c5e.png",
+    "static/media/cake3.png": "/static/media/cake3.80e008c4946baf097d64.png",
+    "static/media/cake4.png": "/static/media/cake4.48525c11b70f17e88c38.png",
+    "static/media/inner-patissier-logo-basic.svg": "/static/media/inner-patissier-logo-basic.40d6a4a73f25e087b5ff82ea63987e58.svg",
+    "index.html": "/index.html",
+    "main.50cc16d7.css.map": "/static/css/main.50cc16d7.css.map",
+    "main.aae75b00.js.map": "/static/js/main.aae75b00.js.map",
+    "879.a6eb78e6.chunk.js.map": "/static/js/879.a6eb78e6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.50cc16d7.css",
+    "static/js/main.aae75b00.js"
+  ]
+}
