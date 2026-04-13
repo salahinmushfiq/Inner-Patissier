@@ -1,21 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-
-// import './globals.css';
-import {Footer} from './front/components';
-// import reportWebVitals from './reportWebVitals';
-import {BrowserRouter} from 'react-router-dom';
 import AppRoutes from './routes';
-import Navbar from './front/components/Navbar';
-import { useStateContext } from './dashboard/contexts/ContextProvider';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './lib/queryClient';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-     
+      <QueryClientProvider client={queryClient}>
         <AppRoutes/>
-        
+      </QueryClientProvider>  
   </React.StrictMode>
 );
 

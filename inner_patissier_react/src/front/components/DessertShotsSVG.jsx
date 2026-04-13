@@ -1,7 +1,7 @@
 import * as React from "react"
 import { SVGProps } from "react"
 
-const DessertShots = () =>
+const DessertShotsSVG = () =>
   (
     <svg
       className='w-32 h-32'
@@ -23,4 +23,4 @@ const DessertShots = () =>
   )
 
 
-export default DessertShots
+export default DessertShotsSVG

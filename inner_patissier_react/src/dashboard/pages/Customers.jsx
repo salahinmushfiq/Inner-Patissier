@@ -24,8 +24,6 @@ const CustomersCopy = () => {
     const [showPopUp, setShowPopUp] = useState(false);
   let customers=[];
   customersData.forEach( (customer,index)=>{
-    
-      
       customers.push({
       id: customer.CustomerID,
       image:customer.CustomerImage,
@@ -39,7 +37,30 @@ const CustomersCopy = () => {
     });
    
   });
-
+  const sx = {
+    className: 'dark:text-gray-200 dark:bg-secondary-dark-bg',
+    boxShadow: 4,
+    border: 0,
+    borderColor: 'lightgray',
+    '& .MuiDataGrid-cell': {
+      color: currentMode === 'Light' ? '#4c4f55' : '#e5e7eb',
+    },
+    '& .MuiDataGrid-columnHeaders': {
+      color: currentMode === 'Light' ? '#4c4f55' : '#e5e7eb',
+    },
+    '& .MuiDataGrid-footerContainer': {
+      color: currentMode === 'Light' ? '#4c4f55' : '#e5e7eb',
+    },
+    '& .MuiTablePagination-root': {
+      color: currentMode === 'Light' ? '#4c4f55' : '#e5e7eb',
+    },
+    '& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows': {
+      color: currentMode === 'Light' ? '#4c4f55' : '#e5e7eb',
+    },
+    '& .MuiSvgIcon-root': {
+      color: currentMode === 'Light' ? '#434c5f' : '#e5e7eb',
+    },
+  };
   let columns=[
     { field: 'id' ,headerName: "ID",flex:1,align: 'center', hide: true},
   { field: 'customer' ,headerName: "Customer",flex:1,minWidth:250,className:"drop-shadow-md justify-between", headerClassName:'text-gray-800 dark:text-gray-200 font-semibold text-center',
@@ -134,31 +155,18 @@ const CustomersCopy = () => {
       <Header category="Page" title="Customers" />
       <div style={{ height: 380}} className="min-w-fit">
       <DataGrid
-          
-          sx={{
-            className:'dark:text-gray-200 dark:bg-secondary-dark-bg ',
-            boxShadow: 6,
-            border: 0,
-            borderColor: `${currentMode==='dark'}` ? '#475569' : 'white',
-            '& .MuiDataGrid-cell:hover': {
-              borderColor:'red-200'
-            },'& .MuiDataGrid-cell:selected': {
-              accentColor: 'darkcyan',
-            },
-            
-          }}
-          initialState={{
-            sorting: {
-              sortModel: [{ field: 'name', sort: 'desc' }],
-            },
-          }}
+        initialState={{
+          sorting: {
+            sortModel: [{ field: 'name', sort: 'desc' }],
+          },
+        }}
         columns={columns}
         rows={customers}
         checkboxSelection={true}
         rowsPerPageOptions={[5,10,20]}
         pageSize={pageSize}
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-        
+        sx={sx}
       />
       </div>
       

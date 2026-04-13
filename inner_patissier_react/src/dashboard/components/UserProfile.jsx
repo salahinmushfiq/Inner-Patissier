@@ -32,7 +32,7 @@ const UserProfile = () => {
            // Fetch the user's public IP address
           
            
-          const response = await axios.get('http://127.0.0.1:8000/user/profile/', {
+          const response = await axios.get(`${base_url}/user/profile/`, {
             headers: {
                 Authorization: `Bearer ${storedToken}`,
                 'Content-Type': 'application/json',

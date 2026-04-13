@@ -4,7 +4,7 @@ import { MouseParallax } from "react-just-parallax";
 
 
 
-export  const OfferingBGSVGAlternative2 = ({parallaxRef}) =>(
+export  const OfferingBGSVGBasic = ({parallaxRef}) =>(
   
   (
     <MouseParallax strength={0.07} parallaxContainerRef={parallaxRef}>

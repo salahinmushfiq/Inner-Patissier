@@ -15,7 +15,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<HomePage/>}/>
                
-      <Route path="/products" element={<CartProvider><ProductsPage/></CartProvider>}/> 
+      <Route path="/products" element={<CartProvider><ContextProvider><ProductsPage/></ContextProvider></CartProvider>}/> 
       <Route path="/cart" element={<CartProvider><CartPage/></CartProvider>}/> 
       <Route path="/checkout">
         <Route index element={<CartProvider><CheckoutProvider><CheckoutPage/></CheckoutProvider></CartProvider>}></Route>

@@ -26,10 +26,14 @@ const CartPage = () => {
   return (
     <>
       <Navbar />
-      <div className="2xl:px-0 -mt-12 py-20 max-container padding-container pb-32 lg:py-12">
-        <h2 className="mt-12 text-xl font-semibold text-gray-900 sm:text-2xl border-b border-gray-200 pb-14">
-          Shopping Cart
-        </h2>
+      <div className="lg:mt-12 2xl:px-0 py-20 max-container padding-container pb-32 lg:py-12">
+        <div className="flex flex-col md:flex-row items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-8 pt-10 gap-4">
+              <div>
+                <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                  Shopping Cart
+                </h2>
+              </div>
+            </div>
 
         <div className="grid grid-cols-1 gap-x-8 gap-y-0 lg:grid-cols-2 mt-8">
           <div className="space-y-2 bg-white shadow-md p-2 lg:max-w-xl xl:max-w-2xl z-10">

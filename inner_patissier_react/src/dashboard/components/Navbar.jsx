@@ -32,7 +32,7 @@ const theme = createTheme({
 });
 
 const Navbar = () => {
- 
+  const base_url = process.env.REACT_APP_API_URL ; 
   const {activeMenu,setActiveMenu,isClicked,setIsClicked,handleClick,screenSize,setScreenSize,currentColor,currentMode,currentToken,refreshToken}=useStateContext();
   const [anchorEl, setAnchorEl] = useState(null);
   const data = {
@@ -68,7 +68,7 @@ const Navbar = () => {
    
     axios
       .post(
-        'http://127.0.0.1:8000/user/logout/',
+        `${base_url}/user/logout/`,
         { refresh: refreshToken },
         {
           headers: {
