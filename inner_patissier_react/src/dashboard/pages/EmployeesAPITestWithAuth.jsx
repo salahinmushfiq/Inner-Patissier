@@ -9,7 +9,7 @@ import { useStateContext } from '../contexts/ContextProvider';
 import { useMapContext } from '../contexts/MapContextProvider';
 const EmployeesAPITestWithAuth = () => {
     const navigate = useNavigate();
-    const {currentColor,currentToken,setToken,currentUser,setCurrentUser}=useStateContext();
+    const {currentColor,currentToken,setToken,currentUser,setCurrentUser,currentMode}=useStateContext();
     const {employees,setEmployees,selectedEmployee,setSelectedEmployee}=useMapContext();
     const[pageSize,setPageSize]= useState(5);
     const [userRoles, setUserRoles] = useState({}); // Map roles to employee IDs
@@ -30,7 +30,7 @@ const EmployeesAPITestWithAuth = () => {
     console.log(currentUser?.role);
     
     useEffect(() => {
-      axios.get('http://127.0.0.1:8000/user/view/', {
+      axios.get(`${base_url}/user/view/`, {
         headers: {
         Authorization: `Bearer ${currentToken}`,
         },
@@ -57,7 +57,7 @@ const EmployeesAPITestWithAuth = () => {
     }));
 
     // Update role on the server
-    axios.patch(`http://127.0.0.1:8000/user/users/${id}/role/`, { role: newRole }, {
+    axios.patch(`${base_url}/user/users/${id}/role/`, { role: newRole }, {
         headers: {
             Authorization: `Bearer ${currentToken}`,
         },
@@ -68,21 +68,30 @@ const EmployeesAPITestWithAuth = () => {
         console.error("There was an error updating the role!", error);
     });
 };
-
-
-  
-    const sx={
-      className:'dark:text-gray-200 dark:bg-secondary-dark-bg',
-      boxShadow: 4,
-      border: 0,
-      borderColor: 'lightgray',
-      '& .MuiDataGrid-cell:hover': {
-        color: 'darkcyan',
-      },'& .MuiDataGrid-cell:active': {
-        accentColor: 'darkcyan',
-      },
-      }
-
+    const sx = {
+    className: 'dark:text-gray-200 dark:bg-secondary-dark-bg',
+    boxShadow: 4,
+    border: 0,
+    borderColor: 'lightgray',
+    '& .MuiDataGrid-cell': {
+      color: currentMode === 'Light' ? '#4c4f55' : '#e5e7eb',
+    },
+    '& .MuiDataGrid-columnHeaders': {
+      color: currentMode === 'Light' ? '#4c4f55' : '#e5e7eb',
+    },
+    '& .MuiDataGrid-footerContainer': {
+      color: currentMode === 'Light' ? '#4c4f55' : '#e5e7eb',
+    },
+    '& .MuiTablePagination-root': {
+      color: currentMode === 'Light' ? '#4c4f55' : '#e5e7eb',
+    },
+    '& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows': {
+      color: currentMode === 'Light' ? '#4c4f55' : '#e5e7eb',
+    },
+    '& .MuiSvgIcon-root': {
+      color: currentMode === 'Light' ? '#434c5f' : '#e5e7eb',
+    },
+  };
       const initialState={
         sorting: {
           sortModel: [{ field: 'name', sort: 'desc' }],

@@ -18,19 +18,19 @@ const HomePage = () => {
     <div>
       <Navbar sectionRefs={sectionRefs} />
       
-      <section ref={homeRef} id="home" className="relative max-container padding-container ...">
+      <section ref={homeRef} id="home" className="relative  ...">
         <Hero />
       </section>
 
-      <section ref={offeringsRef} id="offerings" className="max-container padding-container ...">
+      <section ref={offeringsRef} id="offerings">
         <Offerings />
       </section>
 
-      <section ref={reviewsRef} id="reviews" className="max-container padding-container ...">
+      <section ref={reviewsRef} id="reviews">
         <Testimonials />
       </section>
 
-      <section ref={contactsRef} id="contacts" className="max-container padding-container ...">
+      <section ref={contactsRef} id="contacts">
         <Footer />
       </section>
     </div>

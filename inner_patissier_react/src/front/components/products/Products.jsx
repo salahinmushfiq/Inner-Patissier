@@ -1,40 +1,80 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { api } from "../../../lib/api";
 import ProductItem from "./ProductItem";
-import axios from "axios";
+import ProductSkeleton from "./ProductSkeleton";
 
-const Products = ({ sectionRefs }) => {
-  const [products, setProducts] = useState([]);
-  const base_url = process.env.REACT_APP_API_URL;
-  const accessToken = localStorage.getItem("access_token");
+const extractCursor = (url) => {
+  if (!url) return null;
+  const parsed = new URL(url);
+  return parsed.searchParams.get("cursor");
+};
 
-  const fetchProducts = async () => {
-    try {
-      const response = await axios.get(`${base_url}/products/`);
-      setProducts(response.data); // Adjust if your API wraps data differently
-      console.log("Products");
-      console.log(response.data);
-    } catch (err) {
-      console.error("Error fetching products:", err);
-    }
-  };
+const fetchProducts = async ({ pageParam = null, queryKey }) => {
+  const [_key, filters] = queryKey;
 
+  const params = new URLSearchParams();
+
+  if (pageParam) params.append("cursor", pageParam);
+  if (filters?.category) params.append("category", filters.category);
+  if (filters?.search) params.append("search", filters.search);
+  if (filters?.sort) params.append("sort", filters.sort);
+
+  const res = await api.get(`/products/?${params.toString()}`);
+  return res.data;
+};
+
+const Products = ({ filters }) => {
+  const observerRef = useRef(null);
+
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isLoading,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["products", filters],
+    queryFn: fetchProducts,
+    getNextPageParam: (lastPage) => extractCursor(lastPage.next),
+  });
+
+  // 🔥 Infinite scroll observer
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    if (!observerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasNextPage) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 0.8 }
+    );
+
+    observer.observe(observerRef.current);
+
+    return () => observer.disconnect();
+  }, [hasNextPage, fetchNextPage]);
 
   return (
-    <section
-      id="Products"
-      className="w-full mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-10 justify-items-center pb-32"
-    >
-      {products.length > 0 ? (
-        products.map((product) => (
+    <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      
+      {/* Products */}
+      {data?.pages.map((page) =>
+        page.results.map((product) => (
           <ProductItem key={product.id} product={product} />
         ))
-      ) : (
-        <p className="col-span-full text-center text-gray-500">Loading products...</p>
       )}
+
+      {/* Skeleton */}
+      {(isLoading || isFetchingNextPage) &&
+        Array.from({ length: 6 }).map((_, i) => (
+          <ProductSkeleton key={i} />
+        ))}
+
+      {/* Observer */}
+      <div ref={observerRef} className="h-10" />
     </section>
   );
 };

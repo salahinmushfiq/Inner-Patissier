@@ -8,7 +8,7 @@ import {MdLoop} from 'react-icons/md';
 
 const ProductsAPITest = () => {
   const navigate = useNavigate();
-  const{currentColor,currentToken}=useStateContext();
+  const{currentColor,currentToken,currentMode}=useStateContext();
   const [products,setProducts]= useState([]);
   const [selectedProduct, setSelectedProduct] = useState({});
   const[pageSize,setPageSize]= useState(5);
@@ -71,69 +71,93 @@ const ProductsAPITest = () => {
       console.error("Error removing product:", error);
     }
   };
-let columns=[
-  { field: 'productId',cellClassName: 'super-app-theme--cell' ,headerName: "ID",flex:1,align: 'center', hide: true, headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center'},
-  { field: 'thumbnail' ,headerName: "Product",flex:1,minWidth:110,maxWidth:140,className:"drop-shadow-md text-gray-200 dark:text-gray:400",sortable:false, filterable:false,headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center',renderCell:(params) =>
-<div className='drop-shadow-md pt-2 '>
-  {<img className='h-20 w-20 md:ml-3 w-stretch hover:scale-95 duration-300 inline-flex cursor-pointer  hover:p-5 p-6 drop-shadow-xl' src={params.value} alt="thumbnail"/> }
-</div> },
-{ field: 'title' ,headerName: "Title",flex:1,minWidth:110,maxWidth:170,className:"drop-shadow-md text-gray-200 dark:text-gray:400",sortable:true, filterable:true,headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center',
-renderCell:(params) =>
-<div className='drop-shadow-md pt-2 '>
-  <p className='px-2 inline-flex font-semibold text-gray-800 dark:text-gray-200'>{params.value}</p>
-</div> 
-},
+  const sx = {
+    className: 'dark:text-gray-200 dark:bg-secondary-dark-bg',
+    boxShadow: 4,
+    border: 0,
+    borderColor: 'lightgray',
+    '& .MuiDataGrid-cell': {
+      color: currentMode === 'Light' ? '#4c4f55' : '#e5e7eb',
+    },
+    '& .MuiDataGrid-columnHeaders': {
+      color: currentMode === 'Light' ? '#4c4f55' : '#e5e7eb',
+    },
+    '& .MuiDataGrid-footerContainer': {
+      color: currentMode === 'Light' ? '#4c4f55' : '#e5e7eb',
+    },
+    '& .MuiTablePagination-root': {
+      color: currentMode === 'Light' ? '#4c4f55' : '#e5e7eb',
+    },
+    '& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows': {
+      color: currentMode === 'Light' ? '#4c4f55' : '#e5e7eb',
+    },
+    '& .MuiSvgIcon-root': {
+      color: currentMode === 'Light' ? '#434c5f' : '#e5e7eb',
+    },
+  };
+  let columns=[
+    { field: 'productId',cellClassName: 'super-app-theme--cell' ,headerName: "ID",flex:1,align: 'center', hide: true, headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center'},
+    { field: 'thumbnail' ,headerName: "Product",flex:1,minWidth:110,maxWidth:140,className:"drop-shadow-md text-gray-200 dark:text-gray:400",sortable:false, filterable:false,headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center',renderCell:(params) =>
+  <div className='drop-shadow-md pt-2 '>
+    {<img className='h-20 w-20 md:ml-3 w-stretch hover:scale-95 duration-300 inline-flex cursor-pointer  hover:p-5 p-6 drop-shadow-xl' src={params.value} alt="thumbnail"/> }
+  </div> },
+  { field: 'title' ,headerName: "Title",flex:1,minWidth:110,maxWidth:170,className:"drop-shadow-md text-gray-200 dark:text-gray:400",sortable:true, filterable:true,headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center',
+  renderCell:(params) =>
+  <div className='drop-shadow-md pt-2 '>
+    <p className='px-2 inline-flex font-semibold text-gray-800 dark:text-gray-200'>{params.value}</p>
+  </div> 
+  },
 
-{ field: 'description' ,headerName: "Description",flexGrow: 1,minWidth:180,headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center flex-grow',renderCell:(params) =><p className='px-2 inline-flex  text-gray-800 dark:text-gray-200'>{params.value}</p>}, 
-{ field: 'category'  ,headerName: "Category",flex:1,minWidth:120,maxWidth:150, headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center', renderCell: (params) => <div className=""><p className='font-semibold inline-flex mx-1 text-gray-800 dark:text-gray-200'>{params.value}</p></div>}, 
-// { field: 'stock' ,flex:1,minWidth:60,headerName:"Stock",maxWidth:90, headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center',renderCell:(params) =><p className='px-2 inline-flex text-gray-800 dark:text-gray-200'>{ String(params.value) }</p>}, 
-{ field: 'brand',flex:1,minWidth:90,headerName:"Brand", headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center',renderCell: (params) =><p className='font-semibold text-gray-800 dark:text-gray-200'>{params.value}</p>},
-{
-  field: "stock",
-  headerName: "Stock",
-  headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center',
-  flex:1,
-  renderCell: (params) => (
-    <div className="flex items-center gap-2 justify-center">
-      <input
-        type="number"
-        value={stockValues[params.id] || params.row.stock}
-        onChange={(e) => handleStockChange(params.id, e.target.value)}
-        className="border px-2 py-1 rounded bg-gray-200 text-gray-800 dark:bg-secondary-dark-bg dark:text-white text-center w-auto"
-      />
-     
-    </div>
-  ),
-},
-{
-  field: "remove",
-  headerName: "Remove",
-  headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center',
-  renderCell: (params) => (
+  { field: 'description' ,headerName: "Description",flexGrow: 1,minWidth:180,headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center flex-grow',renderCell:(params) =><p className='px-2 inline-flex  text-gray-800 dark:text-gray-200'>{params.value}</p>}, 
+  { field: 'category'  ,headerName: "Category",flex:1,minWidth:120,maxWidth:150, headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center', renderCell: (params) => <div className=""><p className='font-semibold inline-flex mx-1 text-gray-800 dark:text-gray-200'>{params.value}</p></div>}, 
+  // { field: 'stock' ,flex:1,minWidth:60,headerName:"Stock",maxWidth:90, headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center',renderCell:(params) =><p className='px-2 inline-flex text-gray-800 dark:text-gray-200'>{ String(params.value) }</p>}, 
+  { field: 'brand',flex:1,minWidth:90,headerName:"Brand", headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center',renderCell: (params) =><p className='font-semibold text-gray-800 dark:text-gray-200'>{params.value}</p>},
+  {
+    field: "stock",
+    headerName: "Stock",
+    headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center',
+    flex:1,
+    renderCell: (params) => (
+      <div className="flex items-center gap-2 justify-center">
+        <input
+          type="number"
+          value={stockValues[params.id] || params.row.stock}
+          onChange={(e) => handleStockChange(params.id, e.target.value)}
+          className="border px-2 py-1 rounded bg-gray-200 text-gray-800 dark:bg-secondary-dark-bg dark:text-white text-center w-auto"
+        />
+      
+      </div>
+    ),
+  },
+  {
+    field: "remove",
+    headerName: "Remove",
+    headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center',
+    renderCell: (params) => (
+      <button
+        onClick={() => handleRemoveProduct(params.id)}
+        className="border-red-400 border-2 px-2 py-1 rounded-md text-red-400"
+      >
+        Remove
+      </button>
+    ),
+  },
+  { field: "update",
+    headerName: "update",
+    headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center',
+    renderCell: (params) => (
     <button
-      onClick={() => handleRemoveProduct(params.id)}
-      className="border-red-400 border-2 px-2 py-1 rounded-md text-red-400"
+    onClick={() => handleStockUpdate(params.id)}
+    className=" text-white px-2 py-1 rounded-md border-2 border-solid"
+    style={{borderColor: currentColor, color: currentColor}}  
     >
-      Remove
-    </button>
-  ),
-},
-{ field: "update",
-  headerName: "update",
-  headerClassName:'text-gray-400 dark:text-gray-200 font-semibold text-center',
-  renderCell: (params) => (
-  <button
-  onClick={() => handleStockUpdate(params.id)}
-  className=" text-white px-2 py-1 rounded-md border-2 border-solid"
-  style={{borderColor: currentColor, color: currentColor}}  
-  >
-  
-  Update
-</button>
-  )
-}
+    
+    Update
+  </button>
+    )
+  }
 
-];
+  ];
   return (
     <div className="md:m-10 mt-24 p-2 md:p-10 bg-white rounded-xl dark:text-gray-200 dark:bg-secondary-dark-bg border-white">
       <Header category="Page" title="Products" />
@@ -141,19 +165,6 @@ renderCell:(params) =>
       {
       products.length> 0 ? 
       <DataGrid
-          
-          sx={{
-            className:'dark:text-gray-200 dark:bg-secondary-dark-bg z-1',
-            boxShadow: 4,
-            border: 0,
-            borderColor: 'lightgray',
-            '& .MuiDataGrid-cell:hover': {
-              color: 'darkcyan',
-            },'& .MuiDataGrid-cell:active': {
-              accentColor: 'darkcyan',
-            },
-            
-          }}
           initialState={{
             sorting: {
               sortModel: [{ field: 'name', sort: 'desc' }],
@@ -164,6 +175,7 @@ renderCell:(params) =>
         rowsPerPageOptions={[5,10,20]}
         pageSize={pageSize}
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+        sx={sx}
         />:
         <div role="status" className="space-y-4 animate-pulse max-w-full">
           {

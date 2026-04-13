@@ -32,4 +32,39 @@ code {
 .bg-main-bg{
   background-color: #4b4848;
 } */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
 
+:root {
+  --burgundy: #800020;
+  --cream: #E4D7D1;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: #2D2D2D;
+  background-color: #FAFBFB; /* Off-white prevents  */
+}
+
+h1, h2, h3, .font-serif {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Custom Selection color to match branding */
+::selection {
+  background: var(--cream);
+  color: var(--burgundy);
+}
+@layer components {
+  .auth-input-refined {
+    @apply w-full px-4 py-4 bg-[#FAFBFB] dark:bg-[#1A1110] 
+           border border-[#E4D7D1]/50 dark:border-[#800020]/30 
+           rounded-2xl outline-none transition-all 
+           text-[#800020] dark:text-[#E4D7D1]
+           placeholder:text-[#800020]/20 dark:placeholder:text-[#E4D7D1]/20;
+  }
+  
+  .auth-input-refined:focus {
+    @apply border-[#800020] dark:border-[#E4D7D1] 
+           ring-4 ring-[#800020]/5 dark:ring-[#E4D7D1]/5;
+  }
+}

@@ -1,27 +1,29 @@
 import React from "react";
-
-const Header = ({ primary, secondary }) => {
-  return (
-    <div className="mb-12 mx-auto text-center relative">
-      {/* Primary subtitle */}
-      <p className="text-3xl font-bold md:text-5xl text-[rgba(128,0,32,100%)] dark:text-gray-400 mb-2">
-        {primary}
-      </p>
-
-      {/* Secondary main title */}
-      <h2 className="text-lg md:text-2xl font-semibold tracking-tight text-[rgba(128,0,32,44%)] dark:text-gray-100 relative inline-block">
-        {secondary}
-
-        {/* Curved SVG underline */}
-
-
-      </h2>
-      <svg className="w-36 h-5 mx-auto fill-" viewBox="0 0 148 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path id="Ellipse 15" d="M0.245764 11.3274C4.27312 7.44954 12.0331 4.44031 22.7889 2.58537C33.5448 0.730425 46.9397 0.0913274 61.7019 0.728746C76.4642 1.36616 92.104 3.25895 107.137 6.22741C122.169 9.19587 136.096 13.1415 147.594 17.6897L137.684 19.6844C128.081 15.8858 116.45 12.5905 103.895 10.1113C91.3403 7.63212 78.2783 6.05132 65.9492 5.51896C53.6201 4.9866 42.433 5.52036 33.45 7.06957C24.4669 8.61877 17.986 11.132 14.6225 14.3707L0.245764 11.3274Z" fill="#800020" fill-opacity="0.58"/>
-      </svg>
-
-    </div>
-  );
-};
+import {motion} from "framer-motion";
+const Header = ({ primary, secondary }) => (
+  <div className="mb-16 mx-auto text-center relative">
+    <motion.span 
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      className="text-sm uppercase tracking-[0.3em] text-brand-burgundy/60 font-medium mb-3 block"
+    >
+      {primary}
+    </motion.span>
+    
+    <h2 className="text-4xl md:text-6xl font-playfair font-bold text-brand-burgundy relative inline-block">
+      {secondary}
+      <motion.svg 
+        initial={{ pathLength: 0, opacity: 0 }}
+        whileInView={{ pathLength: 1, opacity: 1 }}
+        transition={{ duration: 1, ease: "easeInOut" }}
+        className="w-full h-4 absolute -bottom-4 left-0" 
+        viewBox="0 0 148 20"
+      >
+        <path d="M0.2 11.3C4.2 7.4 12 4.4 22.7 2.5C33.5 0.7 46.9 0 61.7 0.7C76.4 1.3 92.1 3.2 107.1 6.2C122.1 9.1 136 13.1 147.5 17.6" 
+              stroke="#800020" strokeWidth="2" fill="none" strokeOpacity="0.4" />
+      </motion.svg>
+    </h2>
+  </div>
+);
 
 export default Header;
