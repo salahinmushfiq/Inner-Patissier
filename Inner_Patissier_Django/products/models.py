@@ -14,7 +14,15 @@ class Product(models.Model):
     category = models.CharField(max_length=100, blank=True)
     thumbnail = models.URLField(blank=True,max_length=1200)
     images = models.JSONField(default=list, blank=True)  # For storing multiple images
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["category", "price"]),
+            models.Index(fields=["category", "rating"]),
+            models.Index(fields=["price", "rating"]),
+        ]
+        ordering = ["-created_at"]
 
     def __str__(self):
         return self.title
-

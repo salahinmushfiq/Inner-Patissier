@@ -14,14 +14,40 @@ from .serializers import ProductSerializer, ProductPartialUpdateSerializer, \
     BulkProductSerializer, BulkProductJSONSerializer, ProductStockUpdateSerializer
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.pagination import CursorPagination
+
+
+class ProductCursorPagination(CursorPagination):
+    page_size = 12
+    ordering = "-id"
 
 
 class ProductList(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [AllowAny]
-    # permission_classes = [IsCustomer,]  # Allow customers to view and purchase products
-    # permission_classes = [IsAuthenticated]
+    pagination_class = ProductCursorPagination
+
+    def get_queryset(self):
+        queryset = Product.objects.all().only(
+            "id", "title", "price", "discountPercentage",
+            "description", "thumbnail", "images"
+        ).order_by("-id")
+
+        search = self.request.query_params.get("search")
+        min_price = self.request.query_params.get("min_price")
+        max_price = self.request.query_params.get("max_price")
+
+        if search:
+            queryset = queryset.filter(title__icontains=search)
+
+        if min_price:
+            queryset = queryset.filter(price__gte=min_price)
+
+        if max_price:
+            queryset = queryset.filter(price__lte=max_price)
+
+        return queryset
 
 
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
