@@ -1,4 +1,4 @@
-
+//src/components/products/AddToCartFloatingIcon.jsx
 import React from 'react'
 import { Link} from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
@@ -7,7 +7,7 @@ const AddToCartFloatingIcon = () => {
 
   return (
         <Link to="/cart">
-            <div className="m-12 sticky top-[80%] xs:ml-[80%] lg:ml-[100%] z-50" >
+            <div className="m-12 sticky top-[80%] xs:ml-[90%] lg:ml-[95%] z-50" >
             <div className="relative inline-flex bg-[#e4d7d19d] rounded-full hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 ">
             <div
             

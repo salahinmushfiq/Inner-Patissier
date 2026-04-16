@@ -37,48 +37,42 @@ const Navbar = ({ sectionRefs }) => {
   return (
     <>
       <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        scrolled ? "bg-white/90 backdrop-blur-md py-2 shadow-sm" : "bg-transparent py-4"
+        scrolled 
+        ? "bg-white/80 dark:bg-main-dark-bg/80 backdrop-blur-md py-2 shadow-sm border-b border-brand-cream/10" 
+        : "bg-transparent py-6"
       }`}>
         <div className="max-container padding-container">
           
           <div className="flex justify-between items-center w-full">
             {/* Social Icons (Desktop) */}
-            <div className="hidden lg:flex items-center gap-4 flex-1">
-              <FiPhone className="text-[#800020] h-5 w-5 hover:scale-110 transition-transform cursor-pointer"/>
-              <FaInstagram className="text-[#800020] h-5 w-5 hover:scale-110 transition-transform cursor-pointer"/>
-              <LuFacebook className="text-[#800020] h-5 w-5 hover:scale-110 transition-transform cursor-pointer"/>
-              <MdOutlineMailOutline className="text-[#800020] h-5 w-5 hover:scale-110 transition-transform cursor-pointer"/>
+            <div className="hidden lg:flex items-center gap-6 flex-1">
+              <FiPhone className="text-brand-burgundy dark:text-brand-cream h-4 w-4 hover:scale-110 transition-transform cursor-pointer"/>
+              <FaInstagram className="text-brand-burgundy dark:text-brand-cream h-4 w-4 hover:scale-110 transition-transform cursor-pointer"/>
+              <MdOutlineMailOutline className="text-brand-burgundy dark:text-brand-cream h-5 w-5 hover:scale-110 transition-transform cursor-pointer"/>
             </div>
 
             {/* Central Logo */}
             <Link to="/" className="flex justify-center flex-1">
-              {/* <img 
-                src="/inner-patissier-logo-basic.svg" 
-                alt="logo" 
-                className={`transition-all duration-500 ${scrolled ? "w-40" : "w-60"}`} 
-              /> */}
-             <div className={`transition-all duration-500 overflow-hidden ${scrolled ? "w-24 h-24" : "w-40 h-40"}`}>
-    <CakeIcon 
-      className="w-full h-full object-contain transition-colors duration-300 fill-current text-[#800020] dark:text-white" 
-    />
-  </div>
+              <div className={`transition-all duration-500 ${scrolled ? "w-20 h-20" : "w-32 h-32"}`}>
+                <CakeIcon className="w-full h-full object-contain fill-current text-brand-burgundy dark:text-brand-cream" />
+              </div>
             </Link>
 
             {/* Desktop Actions / Mobile Menu */}
             <div className="flex justify-end flex-1">
-              <Link to="/login" className="hidden lg:block">
-                <div className="group flex items-center gap-2 px-6 py-2 rounded-full border border-[#800020] text-[#800020] hover:bg-[#800020] hover:text-white transition-all">
-                  <FaRegUser className="text-sm" />
-                  <span className="text-sm font-bold uppercase tracking-tighter">Login</span>
-                </div>
-              </Link>
+             <Link to="/login" className="hidden lg:block">
+              <div className="group flex items-center gap-2 px-6 py-2 rounded-full border border-brand-burgundy text-brand-burgundy dark:border-brand-cream dark:text-brand-cream hover:bg-brand-burgundy hover:text-white transition-all">
+                <FaRegUser className="text-xs" />
+                <span className="text-[10px] font-bold uppercase tracking-widest">Atelier Login</span>
+              </div>
+            </Link>
               
               {/* Responsive Menu Trigger */}
               <button onClick={toggle} className="lg:hidden p-2">
                  <div className="space-y-1.5">
-                    <span className={`block w-8 h-0.5 bg-[#800020] transition-all ${isOpen ? "rotate-45 translate-y-2" : ""}`}></span>
-                    <span className={`block w-8 h-0.5 bg-[#800020] ${isOpen ? "opacity-0" : ""}`}></span>
-                    <span className={`block w-8 h-0.5 bg-[#800020] transition-all ${isOpen ? "-rotate-45 -translate-y-2" : ""}`}></span>
+                    <span className={`block w-8 h-0.5 bg-[#800020] dark:bg-brand-cream transition-all ${isOpen ? "rotate-45 translate-y-2" : ""}`}></span>
+                    <span className={`block w-8 h-0.5 bg-[#800020] dark:bg-brand-cream ${isOpen ? "opacity-0" : ""}`}></span>
+                    <span className={`block w-8 h-0.5 bg-[#800020] dark:bg-brand-cream transition-all ${isOpen ? "-rotate-45 -translate-y-2" : ""}`}></span>
                  </div>
               </button>
             </div>
@@ -92,7 +86,7 @@ const Navbar = ({ sectionRefs }) => {
                   <li key={link.key}>
                     <button
                       onClick={() => handleNavClick(link.key)}
-                      className="text-[#800020] text-xs font-bold uppercase tracking-[0.3em] hover:opacity-50 transition-opacity"
+                      className="text-[#800020] dark:text-brand-cream text-xs font-bold uppercase tracking-[0.3em] hover:opacity-50 transition-opacity"
                     >
                       {link.label}
                     </button>

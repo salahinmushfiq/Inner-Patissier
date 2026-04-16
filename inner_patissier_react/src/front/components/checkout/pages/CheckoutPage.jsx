@@ -41,7 +41,7 @@ const CheckoutPage = () => {
 
     return (
         <>
-            <Navbar/>
+        <Navbar/>
         <div className="max-container padding-container flex flex-col flex-wrap gap-10 pb-20 lg:py-12">
             <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 ">
                 <h2 className="text-xl font-semibold text-gray-900 sm:text-2xl pb-6">Checkout</h2>
@@ -99,7 +99,7 @@ const CheckoutPage = () => {
                                 ${!selectedPaymentMethod || status.loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-gray-600 hover:bg-gray-700'}`}
                     >
                     {status.loading ? 'Placing Order...' : 'Place Order'}
-                    </button>
+                 </button>
 
                     {status.error && <p className="text-red-500 mt-3">{status.error}</p>}
                     {status.success && <p className="text-green-600 mt-3">✅ Order placed!</p>}

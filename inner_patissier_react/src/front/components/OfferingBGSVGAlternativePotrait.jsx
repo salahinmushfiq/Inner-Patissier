@@ -15,7 +15,7 @@ export  const OfferingBGSVGAlternativePotrait = ({parallaxRef}) =>(
       xmlnsXlink="http://www.w3.org/1999/xlink"
       className="absolute w-full justify-center opacity-15 -translate-y-56 md:-translate-y-[500px] scale-90"
     >
-     <g id="tools_staff_potrait" fill="#800020">
+     <g id="tools_staff_potrait" fill="#800020" className="dark:fill-brand-cream">
         <g id="rolling-pin" fillOpacity={0.44}>
           <path
             id="Vector"

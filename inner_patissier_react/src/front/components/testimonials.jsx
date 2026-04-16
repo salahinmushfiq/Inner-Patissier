@@ -93,7 +93,7 @@ const Testimonials = () => {
     <section 
       id="reviews" 
       ref={sectionRef} 
-      className="relative py-32 bg-[#FAFBFB] overflow-hidden"
+      className="relative py-32 bg-[#FAFBFB] overflow-hidden dark:bg-main-dark-bg/80"
     >
       {/* FLOATING HERO IMAGES (THE 4 IMAGES) */}
       <FloatingImage src="/hero-img-1.png" scrollYProgress={smoothProgress} offset={100} className="top-10 left-[10%]" />
@@ -106,7 +106,7 @@ const Testimonials = () => {
           <div className="max-w-xl">
              <Header primary="Connoisseurs" secondary="The Inner Circle" />
           </div>
-          <p className="text-[#800020]/60 font-serif italic text-lg max-w-xs text-right">
+          <p className="text-[#800020]/60 dark:text-brand-cream/60 font-serif italic text-lg max-w-xs text-right">
             Crafting moments that linger long after the last bite.
           </p>
         </div>

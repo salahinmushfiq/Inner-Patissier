@@ -209,6 +209,150 @@
 //     );
 // }
 // export default UserSignUp;
+
+// //src/dashboard/UserSignUp.jsx
+// "use client";
+// import React from 'react';
+// import { useStateContext } from '../../contexts/ContextProvider';
+// import axios from 'axios';
+// import { useNavigate, Link } from 'react-router-dom';
+// import { FiSettings, FiUser, FiMail, FiLock, FiCheckCircle } from 'react-icons/fi';
+// import { ThemeSettings } from '../../components';
+// import { motion } from 'framer-motion';
+
+// const UserSignUp = () => {
+//   const navigate = useNavigate();
+//   const { currentColor, setToken, themeSettings, setThemeSettings, setRefreshToken } = useStateContext();
+//   const base_url = process.env.REACT_APP_API_URL || "http://127.0.0.1:8000";
+
+//   const handleFormSubmit = (e) => {
+//     e.preventDefault();
+//     const data = {
+//       email: e.target.elements.email?.value,
+//       firstName: e.target.elements.firstName?.value,
+//       lastName: e.target.elements.lastName?.value,
+//       username: e.target.elements.username?.value,
+//       password: e.target.elements.password?.value,
+//     };
+
+//     axios.post(`${base_url}/user/signup/`, data).then((response) => {
+//       localStorage.setItem('access_token', response.data.Token);
+//       axios.post(`${base_url}/user/login/`, data).then((res2) => {
+//         setToken(res2.data.Token);
+//         setRefreshToken(res2.data.refresh);
+//         localStorage.setItem('access_token', res2.data.Token);
+//         localStorage.setItem('refresh_token', res2.data.refresh);
+//         navigate('/dash/home');
+//       });
+//     });
+//   };
+
+//   return (
+//     <div className="relative min-h-screen w-full flex items-center justify-center bg-[#FAFBFB] py-12 px-4 overflow-hidden">
+//       {/* Background Shapes */}
+//       <div className="absolute top-0 right-0 w-96 h-96 bg-[#800020]/5 rounded-full -mr-20 -mt-20 blur-3xl" />
+//       <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#E4D7D1]/20 rounded-full -ml-20 -mb-20 blur-3xl" />
+
+//       <motion.div 
+//         initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
+//         className="relative z-10 w-full max-w-[550px] p-8 md:p-12 bg-white/90 backdrop-blur-md rounded-[3rem] shadow-2xl border border-white"
+//       >
+//         <div className="mb-8">
+//           <h1 className="text-3xl font-serif text-[#800020]">Join the Kitchen</h1>
+//           <p className="text-xs text-[#800020]/50 font-bold uppercase tracking-widest mt-1">Create Admin Credentials</p>
+//         </div>
+
+//         <form onSubmit={handleFormSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5">
+//           <div className="md:col-span-2 group">
+//             <label className="text-[10px] font-bold text-[#800020]/60 uppercase ml-1">Email Address</label>
+//             <div className="relative mt-1">
+//               <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-[#800020]/30" />
+//               <input id="email" type="email" required className="auth-input-refined" placeholder="name@example.com" />
+//             </div>
+//           </div>
+
+//           <div className="group">
+//             <label className="text-[10px] font-bold text-[#800020]/60 uppercase ml-1">First Name</label>
+//             <div className="relative mt-1">
+//               <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-[#800020]/30" />
+//               <input id="firstName" type="text" required className="auth-input-refined" placeholder="Jean" />
+//             </div>
+//           </div>
+
+//           <div className="group">
+//             <label className="text-[10px] font-bold text-[#800020]/60 uppercase ml-1">Last Name</label>
+//             <div className="relative mt-1">
+//               <input id="lastName" type="text" required className="auth-input-refined pl-4" placeholder="Dupont" />
+//             </div>
+//           </div>
+
+//           <div className="md:col-span-2 group">
+//             <label className="text-[10px] font-bold text-[#800020]/60 uppercase ml-1">Username</label>
+//             <input id="username" type="text" required className="auth-input-refined pl-4 mt-1" placeholder="head_chef_01" />
+//           </div>
+
+//           <div className="md:col-span-2 group">
+//             <label className="text-[10px] font-bold text-[#800020]/60 uppercase ml-1">Secret Password</label>
+//             <div className="relative mt-1">
+//               <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#800020]/30" />
+//               <input id="password" type="password" required className="auth-input-refined" placeholder="••••••••" />
+//             </div>
+//           </div>
+
+//           <div className="md:col-span-2 mt-4">
+//             <button 
+//               type="submit"
+//               className="w-full py-4 bg-[#800020] text-white rounded-2xl font-bold shadow-lg shadow-[#800020]/20 hover:bg-[#600018] transition-all flex items-center justify-center gap-2"
+//             >
+//               <FiCheckCircle /> Create Account
+//             </button>
+//           </div>
+//         </form>
+
+//         <div className="mt-8 text-center border-t border-[#E4D7D1]/30 pt-6">
+//           <p className="text-sm text-[#800020]/60 font-serif italic">
+//             Already registered? 
+//             <Link to="/" className="ml-2 text-[#800020] font-bold not-italic hover:underline">Sign In</Link>
+//           </p>
+//         </div>
+//       </motion.div>
+
+//       {/* Settings remains same for global consistency */}
+//       <div className="fixed right-6 bottom-6">
+//         <button
+//           onClick={() => setThemeSettings(true)}
+//           style={{ background: currentColor }}
+//           className="p-4 rounded-full text-white shadow-xl hover:scale-110 transition-transform"
+//         >
+//           <FiSettings />
+//         </button>
+//       </div>
+//       {themeSettings && <ThemeSettings />}
+
+//       <style jsx>{`
+//         .auth-input-refined {
+//           width: 100%;
+//           padding: 1rem 1rem 1rem 3rem;
+//           background: #FAFBFB;
+//           border: 1px solid rgba(228, 215, 209, 0.5);
+//           border-radius: 1rem;
+//           outline: none;
+//           transition: all 0.3s;
+//           color: #800020;
+//         }
+//         .auth-input-refined:focus {
+//           border-color: #800020;
+//           background: white;
+//           box-shadow: 0 0 0 4px rgba(128, 0, 32, 0.05);
+//         }
+//       `}</style>
+//     </div>
+//   );
+// };
+
+// export default UserSignUp;
+
+
 "use client";
 import React from 'react';
 import { useStateContext } from '../../contexts/ContextProvider';
@@ -221,7 +365,7 @@ import { motion } from 'framer-motion';
 const UserSignUp = () => {
   const navigate = useNavigate();
   const { currentColor, setToken, themeSettings, setThemeSettings, setRefreshToken } = useStateContext();
-  const base_url = process.env.REACT_APP_API_URL || "http://127.0.0.1:8000";
+  const base_url = process.env.REACT_APP_API_URL;
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -234,7 +378,6 @@ const UserSignUp = () => {
     };
 
     axios.post(`${base_url}/user/signup/`, data).then((response) => {
-      localStorage.setItem('access_token', response.data.Token);
       axios.post(`${base_url}/user/login/`, data).then((res2) => {
         setToken(res2.data.Token);
         setRefreshToken(res2.data.refresh);
@@ -245,77 +388,78 @@ const UserSignUp = () => {
     });
   };
 
+  // Reusable input class string for clean code
+  const inputClass = "w-full pl-12 pr-4 py-4 bg-[#FAFBFB] dark:bg-main-dark-bg border border-brand-cream/50 dark:border-gray-800 rounded-2xl outline-none transition-all text-brand-burgundy dark:text-white focus:border-brand-burgundy dark:focus:border-brand-cream focus:bg-white dark:focus:bg-secondary-dark-bg focus:ring-4 focus:ring-brand-burgundy/5";
+
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center bg-[#FAFBFB] py-12 px-4 overflow-hidden">
-      {/* Background Shapes */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#800020]/5 rounded-full -mr-20 -mt-20 blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#E4D7D1]/20 rounded-full -ml-20 -mb-20 blur-3xl" />
+    <div className="relative min-h-screen w-full flex items-center justify-center bg-[#FAFBFB] dark:bg-main-dark-bg py-12 px-4 transition-colors duration-300 overflow-hidden">
+      <div className="absolute top-0 right-0 w-96 h-96 bg-brand-burgundy/5 rounded-full -mr-20 -mt-20 blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-cream/20 dark:bg-brand-burgundy/10 rounded-full -ml-20 -mb-20 blur-3xl" />
 
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-        className="relative z-10 w-full max-w-[550px] p-8 md:p-12 bg-white/90 backdrop-blur-md rounded-[3rem] shadow-2xl border border-white"
+        className="relative z-10 w-full max-w-[550px] p-8 md:p-12 bg-white/90 dark:bg-secondary-dark-bg/90 backdrop-blur-md rounded-[3rem] shadow-2xl border border-white/20 dark:border-gray-800"
       >
         <div className="mb-8">
-          <h1 className="text-3xl font-serif text-[#800020]">Join the Kitchen</h1>
-          <p className="text-xs text-[#800020]/50 font-bold uppercase tracking-widest mt-1">Create Admin Credentials</p>
+          <h1 className="text-3xl font-serif text-brand-burgundy dark:text-brand-cream">Join the Kitchen</h1>
+          <p className="text-xs text-brand-burgundy/50 dark:text-gray-500 font-bold uppercase tracking-widest mt-1">Create Admin Credentials</p>
         </div>
 
         <form onSubmit={handleFormSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="md:col-span-2 group">
-            <label className="text-[10px] font-bold text-[#800020]/60 uppercase ml-1">Email Address</label>
+            <label className="text-[10px] font-bold text-brand-burgundy/60 dark:text-gray-400 uppercase ml-1">Email Address</label>
             <div className="relative mt-1">
-              <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-[#800020]/30" />
-              <input id="email" type="email" required className="auth-input-refined" placeholder="name@example.com" />
+              <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-burgundy/30 group-focus-within:text-brand-burgundy dark:group-focus-within:text-brand-cream" />
+              <input id="email" type="email" required className={inputClass} placeholder="name@example.com" />
             </div>
           </div>
 
           <div className="group">
-            <label className="text-[10px] font-bold text-[#800020]/60 uppercase ml-1">First Name</label>
+            <label className="text-[10px] font-bold text-brand-burgundy/60 dark:text-gray-400 uppercase ml-1">First Name</label>
             <div className="relative mt-1">
-              <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-[#800020]/30" />
-              <input id="firstName" type="text" required className="auth-input-refined" placeholder="Jean" />
+              <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-burgundy/30 group-focus-within:text-brand-burgundy dark:group-focus-within:text-brand-cream" />
+              <input id="firstName" type="text" required className={inputClass} placeholder="Jean" />
             </div>
           </div>
 
           <div className="group">
-            <label className="text-[10px] font-bold text-[#800020]/60 uppercase ml-1">Last Name</label>
+            <label className="text-[10px] font-bold text-brand-burgundy/60 dark:text-gray-400 uppercase ml-1">Last Name</label>
             <div className="relative mt-1">
-              <input id="lastName" type="text" required className="auth-input-refined pl-4" placeholder="Dupont" />
+              <input id="lastName" type="text" required className={`${inputClass} !pl-4`} placeholder="Dupont" />
             </div>
           </div>
 
           <div className="md:col-span-2 group">
-            <label className="text-[10px] font-bold text-[#800020]/60 uppercase ml-1">Username</label>
-            <input id="username" type="text" required className="auth-input-refined pl-4 mt-1" placeholder="head_chef_01" />
+            <label className="text-[10px] font-bold text-brand-burgundy/60 dark:text-gray-400 uppercase ml-1">Username</label>
+            <input id="username" type="text" required className={`${inputClass} !pl-4 mt-1`} placeholder="head_chef_01" />
           </div>
 
           <div className="md:col-span-2 group">
-            <label className="text-[10px] font-bold text-[#800020]/60 uppercase ml-1">Secret Password</label>
+            <label className="text-[10px] font-bold text-brand-burgundy/60 dark:text-gray-400 uppercase ml-1">Secret Password</label>
             <div className="relative mt-1">
-              <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#800020]/30" />
-              <input id="password" type="password" required className="auth-input-refined" placeholder="••••••••" />
+              <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-burgundy/30 group-focus-within:text-brand-burgundy dark:group-focus-within:text-brand-cream" />
+              <input id="password" type="password" required className={inputClass} placeholder="••••••••" />
             </div>
           </div>
 
           <div className="md:col-span-2 mt-4">
             <button 
               type="submit"
-              className="w-full py-4 bg-[#800020] text-white rounded-2xl font-bold shadow-lg shadow-[#800020]/20 hover:bg-[#600018] transition-all flex items-center justify-center gap-2"
+              className="w-full py-4 bg-brand-burgundy text-white rounded-2xl font-bold shadow-lg shadow-brand-burgundy/20 hover:bg-[#600018] transition-all flex items-center justify-center gap-2"
             >
               <FiCheckCircle /> Create Account
             </button>
           </div>
         </form>
 
-        <div className="mt-8 text-center border-t border-[#E4D7D1]/30 pt-6">
-          <p className="text-sm text-[#800020]/60 font-serif italic">
+        <div className="mt-8 text-center border-t border-brand-cream/30 dark:border-gray-800 pt-6">
+          <p className="text-sm text-brand-burgundy/60 dark:text-gray-500 font-serif italic">
             Already registered? 
-            <Link to="/" className="ml-2 text-[#800020] font-bold not-italic hover:underline">Sign In</Link>
+            <Link to="/" className="ml-2 text-brand-burgundy dark:text-brand-cream font-bold not-italic hover:underline">Sign In</Link>
           </p>
         </div>
       </motion.div>
 
-      {/* Settings remains same for global consistency */}
       <div className="fixed right-6 bottom-6">
         <button
           onClick={() => setThemeSettings(true)}
@@ -326,24 +470,6 @@ const UserSignUp = () => {
         </button>
       </div>
       {themeSettings && <ThemeSettings />}
-
-      <style jsx>{`
-        .auth-input-refined {
-          width: 100%;
-          padding: 1rem 1rem 1rem 3rem;
-          background: #FAFBFB;
-          border: 1px solid rgba(228, 215, 209, 0.5);
-          border-radius: 1rem;
-          outline: none;
-          transition: all 0.3s;
-          color: #800020;
-        }
-        .auth-input-refined:focus {
-          border-color: #800020;
-          background: white;
-          box-shadow: 0 0 0 4px rgba(128, 0, 32, 0.05);
-        }
-      `}</style>
     </div>
   );
 };

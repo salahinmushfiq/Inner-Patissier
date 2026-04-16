@@ -7,8 +7,6 @@ import React, {
   useMemo,
 } from "react";
 import axios from "axios";
-// import { getHeaders } from '../../utils';
-import { useCart } from "./CartContext";
 import { getHeaders } from "../../utils";
 import { useNavigate } from "react-router-dom";
 
@@ -22,32 +20,6 @@ export const CheckoutProvider = ({ children }) => {
     success: false,
   });
   const navigate = useNavigate();
-  // const placeOrder = useCallback(async () => {
-  //   setStatus({ loading: true, error: null, success: false });
-
-  //   try {
-  //     const response = await axios.post(`${base_url}/order/create/`, {}, {
-  //       headers: getHeaders(),
-  //       withCredentials: true,
-  //     });
-
-  //     if (response.status === 201) {
-  //       setStatus({ loading: false, error: null, success: true });
-  //       console.log(response.data.id);
-  //       console.log("navigating");
-  //       navigate(`/checkout/details/${response.data.id}`);
-  //       console.log("failed to navigate");
-  //       // You can clear the cart from context or pass a clearCart function as a prop
-  //     }
-  //   } catch (error) {
-  //     console.error('Order error:', error);
-  //     setStatus({
-  //       loading: false,
-  //       error: error.response?.data?.error || 'Failed to place order.',
-  //       success: false,
-  //     });
-  //   }
-  // }, []);
 
   const placeOrder = useCallback(async (paymentMethod) => {
     setStatus({ loading: true, error: null, success: false });
@@ -105,10 +77,6 @@ export const CheckoutProvider = ({ children }) => {
       });
     }
   }, []);
-
-  // const handleViewCheckout =  (orderId) => {
-  //   Navigate(`/checkout/${orderId}`);
-  // };
   return (
     <CheckoutContext.Provider value={{ status, placeOrder }}>
       {children}

@@ -199,41 +199,82 @@
 // }
 
 // export default Footer
+// const Footer = () => {
+//   return (
+//     <footer className="bg-white border-t border-brand-cream/50 pt-20 pb-10">
+//       <div className="max-container padding-container grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+//         <div className="col-span-1 md:col-span-2">
+//           <h2 className="text-3xl font-serif font-bold text-brand-burgundy mb-6">Inner Pâtissier.</h2>
+//           <p className="max-w-xs text-gray-500 leading-relaxed">
+//             Crafting moments of sweetness through artisanal technique and premium ingredients.
+//           </p>
+//         </div>
+        
+//         <div>
+//           <h4 className="font-bold text-brand-burgundy mb-6 uppercase tracking-widest text-xs">Quick Links</h4>
+//           <ul className="space-y-4 text-gray-600">
+//             <li className="hover:text-brand-burgundy transition-colors"><a href="#home">Home</a></li>
+//             <li className="hover:text-brand-burgundy transition-colors"><a href="#offerings">Offerings</a></li>
+//             <li className="hover:text-brand-burgundy transition-colors"><a href="#reviews">Testimonials</a></li>
+//           </ul>
+//         </div>
+
+//         <div>
+//           <h4 className="font-bold text-brand-burgundy mb-6 uppercase tracking-widest text-xs">Visit Us</h4>
+//           <p className="text-gray-600 mb-2">Gulshan 2, Dhaka</p>
+//           <p className="text-gray-600">Bangladesh</p>
+//         </div>
+//       </div>
+      
+//       <div className="max-container padding-container border-t border-brand-cream/30 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+//         <p>© 2026 Inner Pâtissier. All rights reserved.</p>
+//         <div className="flex gap-6 mt-4 md:mt-0">
+//           <span>Instagram</span>
+//           <span>Facebook</span>
+//         </div>
+//       </div>
+//     </footer>
+//   );
+// };
+// export default Footer
+
+
 const Footer = () => {
   return (
-    <footer className="bg-white border-t border-brand-cream/50 pt-20 pb-10">
+    <footer className="bg-white dark:bg-main-dark-bg border-t border-brand-cream/50 dark:border-gray-800 pt-20 pb-10 transition-colors">
       <div className="max-container padding-container grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
         <div className="col-span-1 md:col-span-2">
-          <h2 className="text-3xl font-serif font-bold text-brand-burgundy mb-6">Inner Pâtissier.</h2>
-          <p className="max-w-xs text-gray-500 leading-relaxed">
-            Crafting moments of sweetness through artisanal technique and premium ingredients.
+          <h2 className="text-4xl font-serif font-bold text-brand-burgundy dark:text-brand-cream mb-6 italic">Inner Pâtissier.</h2>
+          <p className="max-w-xs text-gray-500 dark:text-gray-400 leading-relaxed font-serif">
+            Crafting moments of sweetness through artisanal technique and premium ingredients in the heart of Dhaka.
           </p>
         </div>
         
         <div>
-          <h4 className="font-bold text-brand-burgundy mb-6 uppercase tracking-widest text-xs">Quick Links</h4>
-          <ul className="space-y-4 text-gray-600">
-            <li className="hover:text-brand-burgundy transition-colors"><a href="#home">Home</a></li>
-            <li className="hover:text-brand-burgundy transition-colors"><a href="#offerings">Offerings</a></li>
-            <li className="hover:text-brand-burgundy transition-colors"><a href="#reviews">Testimonials</a></li>
+          <h4 className="font-bold text-brand-burgundy dark:text-brand-cream mb-6 uppercase tracking-widest text-[10px]">The Collection</h4>
+          <ul className="space-y-4 text-gray-600 dark:text-gray-400 text-sm">
+            <li className="hover:text-brand-burgundy dark:hover:text-brand-cream transition-colors cursor-pointer">Signature Cakes</li>
+            <li className="hover:text-brand-burgundy dark:hover:text-brand-cream transition-colors cursor-pointer">Petite Treats</li>
+            <li className="hover:text-brand-burgundy dark:hover:text-brand-cream transition-colors cursor-pointer">Connoisseur Reviews</li>
           </ul>
         </div>
 
         <div>
-          <h4 className="font-bold text-brand-burgundy mb-6 uppercase tracking-widest text-xs">Visit Us</h4>
-          <p className="text-gray-600 mb-2">Gulshan 2, Dhaka</p>
-          <p className="text-gray-600">Bangladesh</p>
+          <h4 className="font-bold text-brand-burgundy dark:text-brand-cream mb-6 uppercase tracking-widest text-[10px]">The Atelier</h4>
+          <p className="text-gray-600 dark:text-gray-400 mb-2 text-sm">Gulshan 2, Dhaka</p>
+          <p className="text-gray-600 dark:text-gray-400 text-sm italic font-serif">Bangladesh</p>
         </div>
       </div>
       
-      <div className="max-container padding-container border-t border-brand-cream/30 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-        <p>© 2026 Inner Pâtissier. All rights reserved.</p>
-        <div className="flex gap-6 mt-4 md:mt-0">
-          <span>Instagram</span>
-          <span>Facebook</span>
+      <div className="max-container padding-container border-t border-brand-cream/30 dark:border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-gray-400">
+        <p>© 2026 Inner Pâtissier. Crafted for the Sweetest Moments.</p>
+        <div className="flex gap-8 mt-4 md:mt-0 font-bold">
+          <span className="cursor-pointer hover:text-brand-burgundy dark:hover:text-brand-cream transition-colors">Instagram</span>
+          <span className="cursor-pointer hover:text-brand-burgundy dark:hover:text-brand-cream transition-colors">Facebook</span>
         </div>
       </div>
     </footer>
   );
 };
-export default Footer
+
+export default Footer;

@@ -42,26 +42,52 @@ const OfferingCard = ({ title, Icon, description }) => {
     </motion.div>
   )
 };
+// const OfferingCardAlt2 = ({ title, description, Icon, index }) => {
+//   return (
+//     <motion.div
+//       initial={{ opacity: 0, y: 30 }}
+//       whileInView={{ opacity: 1, y: 0 }}
+//       transition={{ delay: index * 0.1 }}
+//       viewport={{ once: true }}
+//       className="group relative overflow-hidden bg-white p-10 rounded-3xl border border-brand-cream/30 hover:shadow-2xl transition-all duration-500"
+//     >
+//       {/* Interactive Background Fill */}
+//       <span className="absolute inset-0 bg-brand-burgundy translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+
+//       <div className="relative z-10">
+//         <div className="mb-6 inline-block p-4 rounded-2xl bg-brand-cream/20 text-brand-burgundy group-hover:text-brand-cream group-hover:bg-white/10 transition-colors">
+//           <Icon size={32} />
+//         </div>
+//         <h3 className="text-2xl font-serif font-bold text-brand-burgundy group-hover:text-brand-cream transition-colors mb-4">
+//           {title}
+//         </h3>
+//         <p className="text-gray-600 group-hover:text-brand-cream/80 transition-colors leading-relaxed">
+//           {description}
+//         </p>
+//       </div>
+//     </motion.div>
+//   );
+// };
+
 const OfferingCardAlt2 = ({ title, description, Icon, index }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
-      viewport={{ once: true }}
-      className="group relative overflow-hidden bg-white p-10 rounded-3xl border border-brand-cream/30 hover:shadow-2xl transition-all duration-500"
+      className="group relative overflow-hidden bg-white dark:bg-secondary-dark-bg p-10 rounded-3xl border border-brand-cream/30 dark:border-gray-800 hover:shadow-2xl transition-all duration-500"
     >
-      {/* Interactive Background Fill */}
+      {/* Slide-up effect on hover */}
       <span className="absolute inset-0 bg-brand-burgundy translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-out" />
 
       <div className="relative z-10">
         <div className="mb-6 inline-block p-4 rounded-2xl bg-brand-cream/20 text-brand-burgundy group-hover:text-brand-cream group-hover:bg-white/10 transition-colors">
           <Icon size={32} />
         </div>
-        <h3 className="text-2xl font-serif font-bold text-brand-burgundy group-hover:text-brand-cream transition-colors mb-4">
+        <h3 className="text-2xl font-serif font-bold text-brand-burgundy group-hover:text-brand-cream dark:text-brand-cream transition-colors mb-4">
           {title}
         </h3>
-        <p className="text-gray-600 group-hover:text-brand-cream/80 transition-colors leading-relaxed">
+        <p className="text-gray-600 group-hover:text-brand-cream/80 dark:text-gray-400 transition-colors leading-relaxed">
           {description}
         </p>
       </div>

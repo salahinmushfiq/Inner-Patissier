@@ -25,10 +25,16 @@ module.exports = {
             50: '#FEC601',
           },
          'main-bg': '#FAFBFB',
-        'main-dark-bg': '#20232A',
-        'secondary-dark-bg': '#33373E',
-        'light-gray': '#F7F7F7',
-        'half-transparent': 'rgba(0, 0, 0, 0.5)',
+          'main-dark-bg': '#20232A',
+          'secondary-dark-bg': '#33373E',
+          'light-gray': '#F7F7F7',
+          'half-transparent': 'rgba(0, 0, 0, 0.5)',
+            brand: {
+            burgundy: '#800020',
+            cream: '#E4D7D1',
+            lavenderBlush: '#FFF0F5', // Your logo color
+            accent: '#F8EAEC',
+          },
         },
         backgroundImage: {
           'bg-img-cover': "url('/hero-cover-inner-patissier.svg')",

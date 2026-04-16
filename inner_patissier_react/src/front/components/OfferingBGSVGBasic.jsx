@@ -15,7 +15,7 @@ export  const OfferingBGSVGBasic = ({parallaxRef}) =>(
       xmlnsXlink="http://www.w3.org/1999/xlink"
       className="hidden lg:flex absolute w-full justify-center opacity-15 -translate-y-56"
     >
-    <g id="tools_staff_wide" fill="#800020">
+    <g id="tools_staff_wide" fill="#800020" className="dark:fill-brand-cream">
         <g id="rolling-pin" fillOpacity={0.44}>
           <path
             id="Vector"

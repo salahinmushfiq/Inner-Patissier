@@ -243,7 +243,7 @@ const Sidebar = ({ isOpen, toggle, sectionRefs }) => {
           exit="exit"
           variants={sideVariants}
           transition={{ duration: 0.5, ease: [0.19, 1, 0.22, 1] }}
-          className="fixed inset-0 w-full h-full bg-[#E4D7D1] z-[100] flex flex-col items-center justify-center"
+          className="fixed inset-0 w-full h-full bg-brand-cream dark:bg-main-dark-bg z-[100] flex flex-col items-center justify-center"
         >
           {/* Internal Close Button (Hamburger morphing) */}
           <button 
@@ -251,9 +251,9 @@ const Sidebar = ({ isOpen, toggle, sectionRefs }) => {
             onClick={toggle}
           >
             <svg viewBox="0 0 12 12" width="40" height="40">
-              <motion.rect variants={hamburger1} fill="#800020" height="1" width="10" x="1" y="4"></motion.rect> 
-              <motion.rect variants={hamburger2} fill="#800020" height="1" width="10" x="1" y="6"></motion.rect> 
-              <motion.rect variants={hamburger3} fill="#800020" height="1" width="10" x="1" y="8"></motion.rect> 
+              <motion.rect variants={hamburger1} className="fill-[#800020] dark:fill-brand-cream" height="1" width="10" x="1" y="4"></motion.rect> 
+              <motion.rect variants={hamburger2} className="fill-[#800020] dark:fill-brand-cream" height="1" width="10" x="1" y="6"></motion.rect> 
+              <motion.rect variants={hamburger3} className="fill-[#800020] dark:fill-brand-cream" height="1" width="10" x="1" y="8"></motion.rect> 
             </svg>
           </button>
 
@@ -267,15 +267,15 @@ const Sidebar = ({ isOpen, toggle, sectionRefs }) => {
               >
                 <button
                   onClick={() => handleNavClick(link.key)}
-                  className="text-3xl font-serif text-[#800020] uppercase tracking-widest"
+                  className="text-3xl font-serif text-[#800020] dark:text-brand-cream uppercase tracking-widest"
                 >
                   {link.label}
-                  <span className="block h-0.5 bg-[#800020] w-0 group-hover:w-full transition-all duration-300" />
+                  <span className="block h-0.5 bg-[#800020] dark:bg-brand-cream w-0 group-hover:w-full transition-all duration-300" />
                 </button>
               </motion.li>
             ))}
             <motion.li initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <Link to="/login" onClick={toggle} className="text-3xl font-serif text-[#800020] opacity-50 uppercase tracking-widest hover:opacity-100">
+              <Link to="/login" onClick={toggle} className="text-3xl font-serif text-[#800020] dark:text-brand-cream opacity-50 uppercase tracking-widest hover:opacity-100">
                 Login
               </Link>
             </motion.li>

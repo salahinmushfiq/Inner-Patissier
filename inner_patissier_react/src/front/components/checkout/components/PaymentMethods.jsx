@@ -55,28 +55,20 @@ const PaymentMethods = ({ onPaymentChange }) => {
     const method = event.target.value;
     setSelectedMethod(method);
     onPaymentChange && onPaymentChange(method) ; // Notify parent
-    // if (!selectedMethod) {
-    //   alert('Please select a payment method.');
-    //   return;
-    // }
-    // Do whatever you want with selectedMethod here
     console.log("You selected: ");
     console.log(selectedMethod);
   }
 
   return (
-    <div>
-      <p className="mt-8 text-lg font-medium">Payment Methods</p>
-      <form className="mt-5 grid gap-6" >
-        <div className="relative">
+    <div className='p-8 rounded-3xl border border-brand-cream/50 dark:border-gray-100 shadow-sm'>
+      <p className="text-lg font-medium font-bold text-brand-burgundy dark:text-brand-cream">Payment Methods</p>
+      <form className="mt-5 grid gap-6">
+        <div className="relative text-gray-400 dark:text-brand-cream">
           <input
             className="peer hidden"
             id="radio_2"
             type="radio"
             name="paymentMethod"
-            // value="Cash On Delivery"
-            // checked={selectedMethod === 'Cash On Delivery'}
-            // onChange={handleChange}
             value="COD"  // 👈 backend expects this
             checked={selectedMethod === 'COD'}
             onChange={handleChange}
@@ -94,7 +86,7 @@ const PaymentMethods = ({ onPaymentChange }) => {
           </label>
         </div>
 
-        <div className="relative">
+        <div className="relative text-gray-400 dark:text-brand-cream">
           <input
             className="peer hidden"
             id="radio_3"

@@ -10,7 +10,7 @@ import { CheckoutProvider } from './front/components/contexts/CheckoutContext.js
 const AppRoutes = () => {
   return(
     
-      <BrowserRouter>
+  <BrowserRouter>
         
     <Routes>
       <Route path="/" element={<HomePage/>}/>
@@ -49,7 +49,7 @@ const AppRoutes = () => {
               
     </Routes>
   
-    </BrowserRouter>
+  </BrowserRouter>
     
   )
 }

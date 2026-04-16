@@ -230,8 +230,161 @@
 //     );
 // }
 // export default UserLogin;
+
+// //src/dashboard/UserLogin.jsx
+// "use client";
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+// import { useNavigate, Link } from 'react-router-dom';
+// import { FiSettings, FiMail, FiLock, FiChevronRight } from 'react-icons/fi';
+// import { ThemeSettings } from '../../components';
+// import { useStateContext } from '../../contexts/ContextProvider';
+// import { motion, AnimatePresence } from 'framer-motion';
+
+// const UserLogin = () => {
+//   const navigate = useNavigate();
+//   const { currentColor, setCurrentToken, setToken, themeSettings, setThemeSettings, setCurrentUser } = useStateContext();
+//   const [message, setMessage] = useState(null);
+//   const base_url = process.env.REACT_APP_API_URL;
+
+//   // Modern Modal Component
+//   const Modal = ({ message, onClose }) => {
+//     if (!message) return null;
+//     return (
+//       <motion.div 
+//         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+//         className="fixed inset-0 bg-[#800020]/20 backdrop-blur-sm flex items-center justify-center z-[100] px-4"
+//       >
+//         <motion.div 
+//           initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }}
+//           className="bg-white p-8 rounded-[2rem] shadow-2xl max-w-sm w-full border border-[#E4D7D1]"
+//         >
+//           <h2 className={`text-2xl font-serif mb-4 ${message.type === 'error' ? 'text-red-600' : 'text-[#800020]'}`}>
+//             {message.type === 'error' ? 'Opps!' : 'Welcome Back'}
+//           </h2>
+//           <p className="text-gray-600 leading-relaxed">{message.text}</p>
+//           <button
+//             onClick={onClose}
+//             className="mt-6 w-full py-3 bg-[#800020] text-white rounded-xl font-bold hover:bg-[#600018] transition-all"
+//           >
+//             Continue
+//           </button>
+//         </motion.div>
+//       </motion.div>
+//     );
+//   };
+
+//   const handleFormSubmit = (e) => {
+//     e.preventDefault();
+//     let email = e.target.elements.email?.value;
+//     let password = e.target.elements.password?.value;
+//     const data = { "email": email, "password": password };
+
+//     axios.post(`${base_url}/user/login/`, data).then((response) => {
+//       setCurrentToken(response.data.Token);
+//       setToken(response.data.Token);
+//       localStorage.setItem('access_token', response.data.Token);
+//       localStorage.setItem('refresh_token', response.data.refresh);
+
+//       axios.get(`${base_url}/user/profile/`, {
+//         headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` },
+//       }).then(res => {
+//         const userData = res.data;
+//         localStorage.setItem('UserId', userData.id);
+//         setCurrentUser(userData);
+//         setMessage({ type: 'success', text: 'Authentication successful. Redirecting to your dashboard...' });
+//         setTimeout(() => navigate('/dash/home'), 2000);
+//       });
+//     }).catch(err => {
+//       setMessage({ type: 'error', text: err.response?.data?.detail || "Login failed" });
+//     });
+//   };
+
+//   return (
+//     <div className="relative min-h-screen w-full flex items-center justify-center bg-[#FAFBFB] overflow-hidden">
+//       {/* Decorative Background Elements */}
+//       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#E4D7D1]/30 rounded-full blur-[120px]" />
+//       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#800020]/5 rounded-full blur-[120px]" />
+
+//       <AnimatePresence>
+//         {message && <Modal message={message} onClose={() => setMessage(null)} />}
+//       </AnimatePresence>
+
+//       <motion.div 
+//         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+//         className="relative z-10 w-full max-w-[450px] p-8 md:p-12 mx-4 bg-white/80 backdrop-blur-xl rounded-[3rem] shadow-[0_20px_50px_rgba(128,0,32,0.05)] border border-white"
+//       >
+//         <div className="text-center mb-10">
+//           <h1 className="text-4xl font-serif text-[#800020] mb-2">Sign In</h1>
+//           <p className="text-[#800020]/50 uppercase tracking-widest text-[10px] font-bold">Owner Dashboard Access</p>
+//         </div>
+
+//         <form onSubmit={handleFormSubmit} className="space-y-6">
+//           <div className="group">
+//             <label className="block text-xs font-bold text-[#800020]/60 uppercase tracking-wider mb-2 ml-1">Email Address</label>
+//             <div className="relative">
+//               <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-[#800020]/30 group-focus-within:text-[#800020] transition-colors" />
+//               <input
+//                 id="email" type="email" required
+//                 className="w-full pl-12 pr-4 py-4 bg-[#FAFBFB] border border-[#E4D7D1]/50 rounded-2xl focus:outline-none focus:border-[#800020] focus:ring-4 focus:ring-[#800020]/5 transition-all text-[#800020]"
+//                 placeholder="chef@innerpatissier.com"
+//               />
+//             </div>
+//           </div>
+
+//           <div className="group">
+//             <label className="block text-xs font-bold text-[#800020]/60 uppercase tracking-wider mb-2 ml-1">Password</label>
+//             <div className="relative">
+//               <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#800020]/30 group-focus-within:text-[#800020] transition-colors" />
+//               <input
+//                 id="password" type="password" required
+//                 className="w-full pl-12 pr-4 py-4 bg-[#FAFBFB] border border-[#E4D7D1]/50 rounded-2xl focus:outline-none focus:border-[#800020] focus:ring-4 focus:ring-[#800020]/5 transition-all text-[#800020]"
+//                 placeholder="••••••••"
+//               />
+//             </div>
+//           </div>
+
+//           <div className="flex justify-end">
+//             <a href="#" className="text-xs font-serif italic text-[#800020]/60 hover:text-[#800020] transition-colors">Forgot password?</a>
+//           </div>
+
+//           <button 
+//             type="submit"
+//             className="w-full py-4 bg-[#800020] text-white rounded-2xl font-bold shadow-lg shadow-[#800020]/20 hover:shadow-xl hover:bg-[#600018] transition-all flex items-center justify-center gap-2 group"
+//           >
+//             Enter Dashboard
+//             <FiChevronRight className="group-hover:translate-x-1 transition-transform" />
+//           </button>
+//         </form>
+
+//         <div className="mt-10 text-center">
+//           <p className="text-sm text-[#800020]/60 font-serif italic">
+//             Don't have an account? 
+//             <Link to="/signup" className="ml-2 text-[#800020] font-bold not-italic hover:underline">Request Access</Link>
+//           </p>
+//         </div>
+//       </motion.div>
+
+//       {/* Theme Toggle Button */}
+//       <div className="fixed right-6 bottom-6 z-50">
+//         <button
+//           onClick={() => setThemeSettings(true)}
+//           style={{ background: currentColor }}
+//           className="p-4 rounded-full text-white shadow-xl hover:scale-110 transition-transform"
+//         >
+//           <FiSettings className="animate-spin-slow" />
+//         </button>
+//       </div>
+//       {themeSettings && <ThemeSettings />}
+//     </div>
+//   );
+// };
+
+// export default UserLogin;
+
+
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { FiSettings, FiMail, FiLock, FiChevronRight } from 'react-icons/fi';
@@ -245,25 +398,24 @@ const UserLogin = () => {
   const [message, setMessage] = useState(null);
   const base_url = process.env.REACT_APP_API_URL;
 
-  // Modern Modal Component
   const Modal = ({ message, onClose }) => {
     if (!message) return null;
     return (
       <motion.div 
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-[#800020]/20 backdrop-blur-sm flex items-center justify-center z-[100] px-4"
+        className="fixed inset-0 bg-brand-burgundy/20 backdrop-blur-sm flex items-center justify-center z-[100] px-4"
       >
         <motion.div 
           initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }}
-          className="bg-white p-8 rounded-[2rem] shadow-2xl max-w-sm w-full border border-[#E4D7D1]"
+          className="bg-white dark:bg-secondary-dark-bg p-8 rounded-[2rem] shadow-2xl max-w-sm w-full border border-brand-cream dark:border-gray-800"
         >
-          <h2 className={`text-2xl font-serif mb-4 ${message.type === 'error' ? 'text-red-600' : 'text-[#800020]'}`}>
+          <h2 className={`text-2xl font-serif mb-4 ${message.type === 'error' ? 'text-red-600' : 'text-brand-burgundy dark:text-brand-cream'}`}>
             {message.type === 'error' ? 'Opps!' : 'Welcome Back'}
           </h2>
-          <p className="text-gray-600 leading-relaxed">{message.text}</p>
+          <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{message.text}</p>
           <button
             onClick={onClose}
-            className="mt-6 w-full py-3 bg-[#800020] text-white rounded-xl font-bold hover:bg-[#600018] transition-all"
+            className="mt-6 w-full py-3 bg-brand-burgundy text-white rounded-xl font-bold hover:bg-[#600018] transition-all"
           >
             Continue
           </button>
@@ -274,9 +426,10 @@ const UserLogin = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    let email = e.target.elements.email?.value;
-    let password = e.target.elements.password?.value;
-    const data = { "email": email, "password": password };
+    const data = { 
+      email: e.target.elements.email?.value, 
+      password: e.target.elements.password?.value 
+    };
 
     axios.post(`${base_url}/user/login/`, data).then((response) => {
       setCurrentToken(response.data.Token);
@@ -285,13 +438,12 @@ const UserLogin = () => {
       localStorage.setItem('refresh_token', response.data.refresh);
 
       axios.get(`${base_url}/user/profile/`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` },
+        headers: { Authorization: `Bearer ${response.data.Token}` },
       }).then(res => {
-        const userData = res.data;
-        localStorage.setItem('UserId', userData.id);
-        setCurrentUser(userData);
-        setMessage({ type: 'success', text: 'Authentication successful. Redirecting to your dashboard...' });
-        setTimeout(() => navigate('/dash/home'), 2000);
+        setCurrentUser(res.data);
+        localStorage.setItem('UserId', res.data.id);
+        setMessage({ type: 'success', text: 'Authentication successful. Opening the kitchen...' });
+        setTimeout(() => navigate('/dash/home'), 1500);
       });
     }).catch(err => {
       setMessage({ type: 'error', text: err.response?.data?.detail || "Login failed" });
@@ -299,10 +451,9 @@ const UserLogin = () => {
   };
 
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center bg-[#FAFBFB] overflow-hidden">
-      {/* Decorative Background Elements */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#E4D7D1]/30 rounded-full blur-[120px]" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#800020]/5 rounded-full blur-[120px]" />
+    <div className="relative min-h-screen w-full flex items-center justify-center bg-[#FAFBFB] dark:bg-main-dark-bg transition-colors duration-300 overflow-hidden">
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-cream/30 dark:bg-brand-burgundy/10 rounded-full blur-[120px]" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-burgundy/5 rounded-full blur-[120px]" />
 
       <AnimatePresence>
         {message && <Modal message={message} onClose={() => setMessage(null)} />}
@@ -310,45 +461,45 @@ const UserLogin = () => {
 
       <motion.div 
         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-        className="relative z-10 w-full max-w-[450px] p-8 md:p-12 mx-4 bg-white/80 backdrop-blur-xl rounded-[3rem] shadow-[0_20px_50px_rgba(128,0,32,0.05)] border border-white"
+        className="relative z-10 w-full max-w-[450px] p-8 md:p-12 mx-4 bg-white/80 dark:bg-secondary-dark-bg/80 backdrop-blur-xl rounded-[3rem] shadow-2xl border border-white/20 dark:border-gray-800"
       >
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-serif text-[#800020] mb-2">Sign In</h1>
-          <p className="text-[#800020]/50 uppercase tracking-widest text-[10px] font-bold">Owner Dashboard Access</p>
+          <h1 className="text-4xl font-serif text-brand-burgundy dark:text-brand-cream mb-2">Sign In</h1>
+          <p className="text-brand-burgundy/50 dark:text-gray-500 uppercase tracking-widest text-[10px] font-bold">Owner Dashboard Access</p>
         </div>
 
         <form onSubmit={handleFormSubmit} className="space-y-6">
           <div className="group">
-            <label className="block text-xs font-bold text-[#800020]/60 uppercase tracking-wider mb-2 ml-1">Email Address</label>
+            <label className="block text-xs font-bold text-brand-burgundy/60 dark:text-gray-400 uppercase tracking-wider mb-2 ml-1">Email Address</label>
             <div className="relative">
-              <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-[#800020]/30 group-focus-within:text-[#800020] transition-colors" />
+              <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-burgundy/30 group-focus-within:text-brand-burgundy dark:group-focus-within:text-brand-cream transition-colors" />
               <input
                 id="email" type="email" required
-                className="w-full pl-12 pr-4 py-4 bg-[#FAFBFB] border border-[#E4D7D1]/50 rounded-2xl focus:outline-none focus:border-[#800020] focus:ring-4 focus:ring-[#800020]/5 transition-all text-[#800020]"
+                className="w-full pl-12 pr-4 py-4 bg-[#FAFBFB] dark:bg-main-dark-bg border border-brand-cream/50 dark:border-gray-800 rounded-2xl focus:outline-none focus:border-brand-burgundy dark:focus:border-brand-cream focus:ring-4 focus:ring-brand-burgundy/5 transition-all text-brand-burgundy dark:text-white"
                 placeholder="chef@innerpatissier.com"
               />
             </div>
           </div>
 
           <div className="group">
-            <label className="block text-xs font-bold text-[#800020]/60 uppercase tracking-wider mb-2 ml-1">Password</label>
+            <label className="block text-xs font-bold text-brand-burgundy/60 dark:text-gray-400 uppercase tracking-wider mb-2 ml-1">Password</label>
             <div className="relative">
-              <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#800020]/30 group-focus-within:text-[#800020] transition-colors" />
+              <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-burgundy/30 group-focus-within:text-brand-burgundy dark:group-focus-within:text-brand-cream transition-colors" />
               <input
                 id="password" type="password" required
-                className="w-full pl-12 pr-4 py-4 bg-[#FAFBFB] border border-[#E4D7D1]/50 rounded-2xl focus:outline-none focus:border-[#800020] focus:ring-4 focus:ring-[#800020]/5 transition-all text-[#800020]"
+                className="w-full pl-12 pr-4 py-4 bg-[#FAFBFB] dark:bg-main-dark-bg border border-brand-cream/50 dark:border-gray-800 rounded-2xl focus:outline-none focus:border-brand-burgundy dark:focus:border-brand-cream focus:ring-4 focus:ring-brand-burgundy/5 transition-all text-brand-burgundy dark:text-white"
                 placeholder="••••••••"
               />
             </div>
           </div>
 
           <div className="flex justify-end">
-            <a href="#" className="text-xs font-serif italic text-[#800020]/60 hover:text-[#800020] transition-colors">Forgot password?</a>
+            <button type="button" className="text-xs font-serif italic text-brand-burgundy/60 dark:text-gray-500 hover:text-brand-burgundy dark:hover:text-brand-cream transition-colors">Forgot password?</button>
           </div>
 
           <button 
             type="submit"
-            className="w-full py-4 bg-[#800020] text-white rounded-2xl font-bold shadow-lg shadow-[#800020]/20 hover:shadow-xl hover:bg-[#600018] transition-all flex items-center justify-center gap-2 group"
+            className="w-full py-4 bg-brand-burgundy text-white rounded-2xl font-bold shadow-lg shadow-brand-burgundy/20 hover:shadow-xl hover:bg-[#600018] transition-all flex items-center justify-center gap-2 group"
           >
             Enter Dashboard
             <FiChevronRight className="group-hover:translate-x-1 transition-transform" />
@@ -356,14 +507,13 @@ const UserLogin = () => {
         </form>
 
         <div className="mt-10 text-center">
-          <p className="text-sm text-[#800020]/60 font-serif italic">
+          <p className="text-sm text-brand-burgundy/60 dark:text-gray-500 font-serif italic">
             Don't have an account? 
-            <Link to="/signup" className="ml-2 text-[#800020] font-bold not-italic hover:underline">Request Access</Link>
+            <Link to="/signup" className="ml-2 text-brand-burgundy dark:text-brand-cream font-bold not-italic hover:underline">Request Access</Link>
           </p>
         </div>
       </motion.div>
 
-      {/* Theme Toggle Button */}
       <div className="fixed right-6 bottom-6 z-50">
         <button
           onClick={() => setThemeSettings(true)}

@@ -51,33 +51,93 @@
 // }
 
 // export default TopFilter
+// import React from "react";
+// import { useSearchParams } from "react-router-dom";
+
+// const TopFilter = () => {
+//   const [params, setParams] = useSearchParams();
+
+//   const setSort = (value) => {
+//     const newParams = new URLSearchParams(params);
+//     newParams.set("sort", value);
+//     setParams(newParams);
+//   };
+//   const sortOptions = [
+//     { id: 'popular', label: 'Most Popular' },
+//     { id: 'price_low', label: 'Low → High' },
+//     { id: 'price_high', label: 'High → Low' },
+//     { id: 'newest', label: 'Newest' },
+//   ];
+//   return (
+//     <div className="flex gap-3 flex-wrap mt-4">
+//       {sortOptions.map((opt) => (
+//       <button
+//         key={opt.id}
+//         onClick={() => setSort(opt.id)}
+//         className="px-3 py-1 border rounded-lg text-sm hover:bg-gray-100">
+//         {opt.label}
+//       </button>
+//     ))}
+//     </div>
+//   );
+// };
+
+// export default TopFilter;
+//src/front/components/products/TopFilter.jsx
 import React from "react";
 import { useSearchParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const TopFilter = () => {
   const [params, setParams] = useSearchParams();
+  const currentSort = params.get("sort") || "popular";
 
   const setSort = (value) => {
     const newParams = new URLSearchParams(params);
     newParams.set("sort", value);
     setParams(newParams);
   };
+
   const sortOptions = [
     { id: 'popular', label: 'Most Popular' },
-    { id: 'price_low', label: 'Low → High' },
-    { id: 'price_high', label: 'High → Low' },
-    { id: 'newest', label: 'Newest' },
+    { id: 'price_low', label: 'Price: Low → High' },
+    { id: 'price_high', label: 'Price: High → Low' },
+    { id: 'newest', label: 'Newest Arrivals' },
   ];
+
   return (
-    <div className="flex gap-3 flex-wrap mt-4">
-      {sortOptions.map((opt) => (
-      <button
-        key={opt.id}
-        onClick={() => setSort(opt.id)}
-        className="px-3 py-1 border rounded-lg text-sm hover:bg-gray-100">
-        {opt.label}
-      </button>
-    ))}
+    <div className="flex items-center gap-4 flex-wrap mt-6">
+      <span className="text-[10px] uppercase tracking-widest font-bold text-gray-400 dark:text-gray-500 ml-1">
+        Sort By:
+      </span>
+      
+      <div className="flex gap-2 flex-wrap">
+        {sortOptions.map((opt) => {
+          const isActive = currentSort === opt.id;
+          
+          return (
+            <button
+              key={opt.id}
+              onClick={() => setSort(opt.id)}
+              className={`relative px-4 py-2 rounded-full text-xs font-medium transition-all duration-300 border ${
+                isActive 
+                  ? "border-brand-burgundy text-brand-burgundy dark:border-brand-cream dark:text-brand-cream" 
+                  : "border-brand-cream dark:border-gray-800 text-gray-500 dark:text-gray-400 hover:border-brand-burgundy/30"
+              }`}
+            >
+              {/* Subtle background glow for active item */}
+              {isActive && (
+                <motion.span 
+                  layoutId="activeFilter"
+                  className="absolute inset-0 rounded-full bg-brand-burgundy/5 dark:bg-brand-cream/5"
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                />
+              )}
+              <span className="relative z-10">{opt.label}</span>
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 };
