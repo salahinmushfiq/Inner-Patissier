@@ -196,7 +196,7 @@ DELETE /cart/remove/<product_id>/
 ### 1. Clone
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/salahinmushfiq/Inner-Patissier
 cd inner_patissier_react
 ```
 
